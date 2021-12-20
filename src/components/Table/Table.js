@@ -3,11 +3,12 @@ import axios from "axios";
 import { Card } from "react-bootstrap";
 import classes from "./Table.module.css";
 const Table = () => {
-  const [vehicle, setVehicle] = useState({ name: "", pilots: "", max: 0 });
+  const [vehicle, setVehicle] = useState("");
+  const [max, setMax] = useState(0);
 
 
   const findHighestSum = async () => {
-    let max = 0;
+    let maxSum = max;
     try {
       const allVehicles = await axios(
         "https://www.swapi.tech/api/vehicles?page=1&limit=10"
@@ -20,24 +21,25 @@ const Table = () => {
           const homeWorld = (
             await axios.get(p.data.result.properties.homeworld)
           ).data.result.properties;
-          console.log(homeWorld);
-          console.log(homeWorld.population);
+          //console.log(homeWorld);
+          //console.log(homeWorld.population);
           tempSum += parseInt(homeWorld.population);
         }
 
-        if (tempSum > max) max = tempSum;
+        if (tempSum > maxSum) maxSum = tempSum;
 
-        console.log(max); 
+        //console.log(max); 
       }
-      setVehicle(vehicle.max);
+      setMax(maxSum)
+      console.log(maxSum);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    findHighestSum();
-  }, []);
+    //findHighestSum();
+  }, [max]);
 
   return (
     <Card className={classes.table}>
@@ -46,7 +48,7 @@ const Table = () => {
         <Card.Subtitle className="mb-2 text-muted">
           Vehicle name with the largest sum
         </Card.Subtitle>
-        <Card.Text>{vehicle.max}</Card.Text>
+        <Card.Text>{max}</Card.Text>
         <Card.Subtitle className="mb-2 text-muted">
           Related home planets and their respective population
         </Card.Subtitle>
