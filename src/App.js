@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Table from "./components/Table/Table";
+import { Navbar, Container, Col, Row } from "react-bootstrap";
+import Chart from "./components/Chart/Chart";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand  style={{ fontSize: "2rem" }}>
+            <img
+              src="/empire.png"
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+              alt="SWAPI"
+            />{" "}
+            SWapi
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+
+      <Container fluid="md">
+        <Row>
+          <Col>
+            {" "}
+            <Table></Table>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            {" "}
+            <Chart></Chart>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
