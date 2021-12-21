@@ -21,10 +21,10 @@ const Chart = () => {
 
 	// }
 
-	return data.results.map((e1) => {
+	return data.results.map((e1,i) => {
 		if (planets.some((e2) => e2.name === e1.name)) {
 			return (
-				<div>
+				<div key={i}>
 					{e1.name}
 					{/* {getPopulation(e1.url)}     */}
 				</div>
