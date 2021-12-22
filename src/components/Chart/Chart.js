@@ -1,50 +1,47 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react";
+import { getPlanets } from "../../api";
+import { Card, Spinner, Table } from "react-bootstrap";
 
 const Chart = ({ children, width, height }) => {
-  const [data, setData] = useState({ results: [] });
-  const [population, setPopulation] = useState([]);
-  const planets = [
-    { name: "Tatooine" },
-    { name: "Alderaan" },
-    { name: "Naboo" },
-    { name: "Bespin" },
-    { name: "Endor" },
-  ];
+  const [planets, setPlanets] = useState();
+  const barWidth = 50;
+  const barMargin = 30;
+  const numberofBars = expensesData.length;
+  let width = numberofBars * (barWidth + barMargin);
 
-  useEffect(async () => {
-    const planets = await axios("https://www.swapi.tech/api/planets");
-    setData(planets.data);
-	console.log(planets.data)
-	for(const planet of planets.data.results.url){
-		const p = await axios(planet)
-		const homeWorld = (
-            await axios.get(p.data.result.properties.homeworld)
-          ).data.result.properties;
-		  console.log(homeWorld)
-	}
-
+  const fetchPlanets = useCallback(async () => {
+    const res = await getPlanets();
+    setPlanets(res);
   }, []);
-  return (
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      width="100%"
-      height="70%"
-      preserveAspectRatio="xMidYMax meet"
-    >
-      {children}
-    </svg>
+
+  const renderChart = (planets)=> {
+    {planets.map((planet, index) => {
+      const barHeight = planet.population;
+      return (
+        <Bar
+        key={ined}
+        x={index * (barWidth + barMargin)}
+        y={chartHeight - barHeight}
+        width={barWidth}
+        height={barHeight}
+        planetName={planet.name}
+        />
+      );
+    })}
+  }
+
+  useEffect(() => {
+    fetchPlanets();
+  }, []);
+  return planets ? (
+    <Card>
+      {renderChart(planets)}
+    </Card>
+  ) : (
+    <Spinner animation="border" role="status" style={{ margin: "1rem" }}>
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
   );
-  // return data.results.map((e1,i) => {
-  // 	if (planets.some((e2) => e2.name === e1.name)) {
-  // 		return (
-  // 			<div key={i}>
-  // 				{e1.name}
-  // 				{/* {getPopulation(e1.url)}     */}
-  // 			</div>
-  // 		);
-  // 	}
-  // });
 };
 
 export default Chart;

@@ -44,13 +44,20 @@ const findHighestSum = async () => {
 
 const getPlanets = async () => {
   try {
+    let requiredPlanets = [];
+    let dataPlanets = [];
     const planets = await axios("https://www.swapi.tech/api/planets");
     for (let planet of planets.data.results) {
       const p = await axios(planet.url);
+      const homeWorld = p.data.result.properties;
+      dataPlanets.push(homeWorld);
     }
+    return (requiredPlanets = dataPlanets.filter((o1) =>
+      planetsNames.some((o2) => o1.name === o2.name)
+    ));
   } catch (error) {
     console.log(error);
   }
 };
 
-export { findHighestSum };
+export { findHighestSum, getPlanets };

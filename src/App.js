@@ -24,13 +24,13 @@ function App() {
         <Row>
           <Col>
            
-            <VehicleTable></VehicleTable>
+            {/* <VehicleTable></VehicleTable> */}
           </Col>
         </Row>
 
         <Row>
           <Col>
-           
+           <Chart></Chart>
           </Col>
         </Row>
       </Container>
