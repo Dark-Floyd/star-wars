@@ -1,7 +1,8 @@
 import "./App.css";
 import VehicleTable from "./components/VehicleTable/VehicleTable";
 import { Navbar, Container, Col, Row } from "react-bootstrap";
-import Chart from "./components/Chart/Chart";
+import Chart from "./components/FullChart/Chart/Chart";
+import FullChart from "./components/FullChart/Fullchart";
 function App() {
   return (
     <div className="App">
@@ -24,13 +25,13 @@ function App() {
         <Row>
           <Col>
            
-            {/* <VehicleTable></VehicleTable> */}
+            <VehicleTable></VehicleTable>
           </Col>
         </Row>
 
         <Row>
           <Col>
-           <Chart></Chart>
+           <FullChart></FullChart>
           </Col>
         </Row>
       </Container>

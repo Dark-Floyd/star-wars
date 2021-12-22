@@ -22,7 +22,7 @@ const VehicleTable = () => {
     return pilots.map((pilot, i) => <td key={i}>{pilot} </td>);
   };
   useEffect(() => {
-    //fetchVehicle();
+    fetchVehicle();
   }, []);
 
   return vehicle ? (
