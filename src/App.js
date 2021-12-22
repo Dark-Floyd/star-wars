@@ -1,5 +1,5 @@
 import "./App.css";
-import Table from "./components/Table/Table";
+import VehicleTable from "./components/VehicleTable/VehicleTable";
 import { Navbar, Container, Col, Row } from "react-bootstrap";
 import Chart from "./components/Chart/Chart";
 function App() {
@@ -23,15 +23,14 @@ function App() {
       <Container fluid="md">
         <Row>
           <Col>
-            {" "}
-            <Table></Table>
+           
+            <VehicleTable></VehicleTable>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            {" "}
-            <Chart></Chart>
+           
           </Col>
         </Row>
       </Container>
