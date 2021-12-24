@@ -5,14 +5,12 @@ import classes from "./VehicleTable.module.css";
 
 const VehicleTable = () => {
   const [vehicle, setVehicle] = useState();
-
   const fetchVehicle = useCallback(async () => {
     const res = await findHighestSum();
     setVehicle(res);
   }, []);
-
   const renderPlanets = (planets) => {
-    return planets.map((planet,i) => (
+    return planets.map((planet, i) => (
       <td key={i}>
         {planet.name} , {planet.population}
       </td>
@@ -27,9 +25,7 @@ const VehicleTable = () => {
 
   return vehicle ? (
     <Card className={classes.table}>
-      
       <Table responsive>
-       
         <tbody>
           <tr>
             <td>Vehicle name with the largest sum</td>
@@ -40,7 +36,6 @@ const VehicleTable = () => {
             <td>Related home planets and their respective population</td>
             {renderPlanets(vehicle.planets)}
           </tr>
-
           <tr>
             <td>Related pilot names</td>
             {renderPilots(vehicle.pilots)}

@@ -10,7 +10,6 @@ const planetsNames = [
 const findHighestSum = async () => {
   let maxSum = 0;
   const vehicleHighestSum = {};
-
   try {
     const allVehicles = await axios(
       "https://www.swapi.tech/api/vehicles?page=1&limit=10"

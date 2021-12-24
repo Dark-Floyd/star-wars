@@ -3,7 +3,6 @@ import { getPlanets } from "../../api";
 import { Spinner } from "react-bootstrap";
 import Bar from "./Chart/Bar/Bar";
 import Chart from "./Chart/Chart";
-import './FullChart.module.css';
 
 const FullChart = () => {
   const [planets, setPlanets] = useState();
@@ -11,16 +10,12 @@ const FullChart = () => {
   const barMargin = 30;
   const numberofBars = 5;
   const width = numberofBars * (barWidth + barMargin);
-  const chartHeight = 50;
+  const chartHeight = 100;
 
   const fetchPlanets = useCallback(async () => {
     const res = await getPlanets();
     setPlanets(res);
-    //numberofBars = res.length;
-    //width = numberofBars * (barWidth + barMargin);
-    console.log(res)
   }, []);
-
 
   useEffect(() => {
     fetchPlanets();
@@ -29,7 +24,7 @@ const FullChart = () => {
   return planets ? (
     <Chart height={chartHeight} width={width} >
       {planets.map((planet, index) => {
-        const barHeight = parseInt(planet.population / 10000);
+        const barHeight = parseInt(Math.sqrt(1000,planet.population));
         return (
           <Bar
             key={planet.name}
@@ -49,5 +44,4 @@ const FullChart = () => {
     </Spinner>
   );
 };
-
 export default FullChart;
